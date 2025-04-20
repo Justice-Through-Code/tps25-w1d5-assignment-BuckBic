@@ -96,30 +96,32 @@ def main():
         choice = input("Enter your choice (1-4): ").strip()
 
         if choice == "1":
-            breeds = get_all_breeds()
-            show_breeds(breeds)
-        except Exception as e:
-            print(e)
+            try:
+                breeds = get_all_breeds()
+                show_breeds(breeds)
+            except Exception as e:
+                print(e)
 
         elif choice == "2":
             try:
                 breeds = get_all_breeds()
                 breed = input("Enter breed name: ").strip().lower()
-            # TODO: Check if breed exists and fetch image
-            # TODO: Print image URL or error message
+                if breed not in breeds:
+                    print("Error: That breed does not exist.")
+                    continue
+                url = get_random_image(breed)
+                print(f"Random image URL for {breed}: {url}")
+            except Exception as e:
+                print(e)
 
         elif choice == "3":
             try:
                 breeds = get_all_breeds()
                 breed = input("Enter breed name: ").strip().lower()
-            # TODO: Check if breed has sub-breeds
-            # TODO: Ask for sub-breed, check if valid, then fetch image
-            # TODO: Print image URL or error message
-
                 if breed not in breeds:
                     print("Error: That breed does not exist.")
                     continue
-            
+
                 sub_breeds = breeds[breed]
                 if not sub_breeds:
                     print(f"Error: {breed} has no sub-breeds.")
