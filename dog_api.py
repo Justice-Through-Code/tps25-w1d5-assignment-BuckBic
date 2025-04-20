@@ -43,6 +43,7 @@ def get_all_breeds():
         data = response.json()
         return data["message"]
     except Exception as e:
+                # GPT helped me change this from print to raise to pass the unit test
         raise Exception("Error: Could not fetch breed list from API") from e
 
 
@@ -79,7 +80,7 @@ def get_random_sub_breed_image(breed, sub_breed):
 def show_breeds(breeds_dict):
     """Prints all available breeds 5 per line."""
     # TODO: Print all breeds (sorted), 5 per line
-    
+        # GPT helped format this to print breeds in clean rows of 5
     flat_breeds = sorted(breeds_dict.keys())
     for i in range(0, len(flat_breeds), 5):
         print(' | '.join(flat_breeds[i:i+5]))
@@ -97,6 +98,7 @@ def main():
 
         if choice == "1":
             try:
+                 # I had this working, but GPT helped point out I needed try/except here too for consistency
                 breeds = get_all_breeds()
                 show_breeds(breeds)
             except Exception as e:
